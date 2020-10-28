@@ -122,8 +122,75 @@ public class AdminServiceController {
     }
 
 
+    @PostMapping("/edit_user_data_submit")
+    @ResponseBody
+    public String editUser(@RequestParam(value = "name") String name,
+                             @RequestParam(value = "surname") String surname,
+                             @RequestParam(value = "birth_date") String birthDate,
+                             @RequestParam(value = "email") String email,
+                             @RequestParam(value = "sickness_name") String sicknessName,
+                             @RequestParam(value = "pill_name") String pill_name,
+                             @RequestParam(value = "doctor_id") long doctor_id,
+                             @RequestParam(value = "recovery_period") int recovery_period,
+                             @RequestParam(value = "last_attendance_date") String lastAttendanceDate) throws ParseException {
 
 
+        User user = userRepoServiceClass.getUserByEmail(email);
+        if (name == null) {
+            return "setNamePlease";
+        }
+        user.setName(name);
+        if (surname == null) {
+            return "setSurNamePlease";
+        }
+        user.setSurname(surname);
+
+        if (email == null) {
+            return "setEmailPlease";
+        }
+
+        user.setEmail(email);
+
+
+        if (recovery_period == 0) {
+            return "setRecoveryPeriodPlease";
+        }
+        user.setRecoveryPeriod(recovery_period);
+        if (birthDate == null) {
+            return "setDateOfBirthPlease";
+        }
+        user.setBirthDate(userServiceClass.getDateFromString(birthDate));
+        if (lastAttendanceDate == null) {
+            return "setLastAttendanceDate";
+        }
+        user.setLastAttendanceDate(userServiceClass.getDateFromString(lastAttendanceDate));
+
+        if (pill_name == null) {
+            return "setPillIdPlease";
+        }
+
+        Pill s = new Pill();
+        s.setName(pill_name);
+        user.setPillList(List.of(s));
+
+        if (sicknessName == null) {
+            return "setSicknessIdPlease";
+        }
+
+        Sickness sickness = new Sickness();
+        sickness.setName(sicknessName);
+        user.setSicknessList(List.of(sickness));
+
+        if (doctor_id == 0) {
+            return "setDoctorIDPlease";
+        }
+
+        user.setDoctor(doctorRepoServiceClass.getDoctorById(doctor_id));
+
+
+        userRepoServiceClass.updateUser(user);
+        return user.toString();
+    }
 
 
 }
