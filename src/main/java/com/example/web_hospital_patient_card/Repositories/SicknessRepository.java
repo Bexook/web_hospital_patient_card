@@ -9,4 +9,6 @@ public interface SicknessRepository extends JpaRepository<Sickness,Long> {
 
     public Sickness getById(long id);
 
+    public Sickness findByName(String name);
+
 }

@@ -26,7 +26,7 @@ public class AdminViewController {
 
     @GetMapping("/edit_user")
     public String editUserData(Model model, @RequestParam("user_email") String email){
-        User user = userRepoServiceClass.getUserByEmail(email);
+        User user = userRepoServiceClass.getSingleUserEmail(email);
         String page;
         if(user!=null){
             model.addAttribute("user",user);

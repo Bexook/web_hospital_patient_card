@@ -33,7 +33,7 @@ public class UserServiceClass {
 
 
     public void addNewSickness(String email, Sickness s){
-        User user = userRepoServiceClass.getUserByEmail(email);
+        User user = userRepoServiceClass.getSingleUserEmail(email);
         user.getSicknessList().add(s);
         userRepoServiceClass.updateUser(user);
     }

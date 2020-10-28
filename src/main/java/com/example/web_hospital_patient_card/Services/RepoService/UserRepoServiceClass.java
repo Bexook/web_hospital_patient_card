@@ -23,7 +23,7 @@ public class UserRepoServiceClass {
 
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public User getSingleUser(String email){
+    public User getSingleUserEmail(String email){
         return userRepository.findByEmail(email);
     }
 
@@ -32,10 +32,6 @@ public class UserRepoServiceClass {
         return userRepository.findByEmail(user.getEmail()) != null;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public User getUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
 
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

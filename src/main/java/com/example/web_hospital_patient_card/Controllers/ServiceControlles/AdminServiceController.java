@@ -8,9 +8,12 @@ import com.example.web_hospital_patient_card.SecurityConfig.Encoder.PasswordEnco
 import com.example.web_hospital_patient_card.Services.ModelService.SicknessServiceClass;
 import com.example.web_hospital_patient_card.Services.ModelService.UserServiceClass;
 import com.example.web_hospital_patient_card.Services.RepoService.DoctorRepoServiceClass;
+import com.example.web_hospital_patient_card.Services.RepoService.PillRepoServiceClass;
 import com.example.web_hospital_patient_card.Services.RepoService.SicknessRepoServiceClass;
 import com.example.web_hospital_patient_card.Services.RepoService.UserRepoServiceClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +29,7 @@ public class AdminServiceController {
 
 
     @Autowired
+    @Qualifier("BCryptEncoder")
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -39,6 +43,10 @@ public class AdminServiceController {
 
     @Autowired
     private DoctorRepoServiceClass doctorRepoServiceClass;
+
+    @Autowired
+    private PillRepoServiceClass pillRepoServiceClass;
+
 
     @PostMapping("/addNewAdmin")
     @ResponseBody
@@ -98,17 +106,27 @@ public class AdminServiceController {
             return "setPillIdPlease";
         }
 
-        Pill s =new Pill();
-        s.setName(pill_name);
-        user.setPillList(List.of(s));
+        if(pillRepoServiceClass.getPillByName(pill_name)==null){
+            Pill s =new Pill();
+            s.setName(pill_name);
+            user.setPillList(List.of(s));
+        }else {
+            user.setPillList(List.of(pillRepoServiceClass.getPillByName(pill_name)));
+        }
+
 
         if (sicknessName == null) {
             return "setSicknessIdPlease";
         }
 
-        Sickness sickness =new Sickness();
-        sickness.setName(sicknessName);
-        user.setSicknessList(List.of(sickness));
+        if(sicknessRepoServiceClass.getSicknessByName(sicknessName)==null){
+            Sickness sickness =new Sickness();
+            sickness.setName(sicknessName);
+            user.setSicknessList(List.of(sickness));
+        }else{
+            user.setSicknessList(List.of(sicknessRepoServiceClass.getSicknessByName(sicknessName)));
+        }
+
 
         if (doctor_id == 0) {
             return "setDoctorIDPlease";
