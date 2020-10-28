@@ -42,4 +42,10 @@ public class UserRepoServiceClass {
     public void updateUser(User user) {
         userRepository.save(user);
     }
+
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public User getUserById(long id){
+        return userRepository.findById(id);
+    }
 }

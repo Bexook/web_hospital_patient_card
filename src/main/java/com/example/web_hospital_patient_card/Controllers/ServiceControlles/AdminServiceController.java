@@ -125,7 +125,8 @@ public class AdminServiceController {
 
     @PostMapping("/edit_user_data_submit")
     @ResponseBody
-    public String editUser(@RequestParam(value = "name",defaultValue = "null") String name,
+    public String editUser(@RequestParam(value = "user_id",defaultValue = "0") long id,
+                            @RequestParam(value = "name",defaultValue = "null") String name,
                              @RequestParam(value = "surname",defaultValue = "null") String surname,
                              @RequestParam(value = "birth_date",defaultValue = "null") String birthDate,
                              @RequestParam(value = "email",defaultValue = "null") String email,
@@ -135,8 +136,8 @@ public class AdminServiceController {
                              @RequestParam(value = "recovery_period",defaultValue = "0") int recovery_period,
                              @RequestParam(value = "last_attendance_date",defaultValue = "null") String lastAttendanceDate) throws ParseException {
 
-
-        User user = userRepoServiceClass.getUserByEmail(email);
+        User user = userRepoServiceClass.getUserById(id);
+        System.out.println(user.toString());
         if (!name.equals("null")) {
             user.setName(name);
         }

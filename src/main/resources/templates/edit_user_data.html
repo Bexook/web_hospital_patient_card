@@ -76,6 +76,12 @@
 
 <div class="new_user_data">
     <form action="/admin_service/edit_user_data_submit" method="post">
+
+        <label>
+            Id:<br/>
+            <input type="text" name="user_id" th:value="${user.id}" />
+        </label><br/><br/>
+
         <label>
             Name:<br/>
             <input type="text" name="name"/>
@@ -90,8 +96,9 @@
 
         <label>
             Email<br/>
-            <input type="email" name="email"/>
+            <input type="email" name="email" th:value="${user.email}"/>
         </label><br/><br/>
+
 
         <label>
             Birth Date(##-##-####):<br/>
