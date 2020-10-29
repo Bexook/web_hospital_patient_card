@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<body>
+<div class="user_data">
+
+    <P><strong>User name:</strong></P><p th:text="${user.name}"></p>
+    <P><strong>User surname:</strong></P><p th:text="${user.surname}"></p>
+    <p><strong>User email:</strong></p><p th:text="${user.email}"></p>
+    <p><strong>User date of birth:</strong></p><p th:text="${user.birthDate}"></p>
+    <p><strong>User last attendance date:</strong></p><p th:text="${user.lastAttendanceDate}"></p>
+    <p><strong>User doctor:</strong></p><p th:text="${user.getDoctor().getId()}"></p>
+    <p><strong>User sicknesses:</strong></p>
+    <table>
+        <thead>
+        <tr>
+            <th>SICKNESS ID</th>
+            <th>SICKNESS Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sicknessList, stat : ${user.sicknessList}">
+            <td th:text="${sicknessList.getId()}" ></td>
+            <td th:text="${sicknessList.getName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><strong>User pills list:</strong></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>PILL ID</th>
+            <th>PILL Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pillList, stat : ${user.pillList}">
+            <td th:text="${pillList.id}" ></td>
+            <td th:text="${pillList.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

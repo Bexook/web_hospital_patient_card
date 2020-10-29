@@ -209,4 +209,9 @@ public class AdminServiceController {
     }
 
 
+    @PostMapping("/delete")
+    @ResponseBody
+    public void delete(@RequestParam("user_email") String email){
+        userRepoServiceClass.deleteUser(email);
+    }
 }

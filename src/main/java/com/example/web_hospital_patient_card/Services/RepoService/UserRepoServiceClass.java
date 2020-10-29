@@ -44,4 +44,10 @@ public class UserRepoServiceClass {
     public User getUserById(long id){
         return userRepository.findById(id);
     }
+
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void deleteUser(String email){
+        userRepository.delete( userRepository.findByEmail(email));
+    }
 }

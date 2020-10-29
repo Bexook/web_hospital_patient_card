@@ -38,4 +38,10 @@ public class AdminViewController {
         return page;
     }
 
+
+    @GetMapping("/delete_user")
+    public String getDeletePage(){
+        return "delete_page";
+    }
+
 }

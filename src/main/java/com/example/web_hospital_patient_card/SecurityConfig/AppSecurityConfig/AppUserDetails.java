@@ -29,13 +29,11 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        System.out.println(user.getPassword());
         return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        System.out.println(user.getEmail());
         return user.getEmail();
     }
 
