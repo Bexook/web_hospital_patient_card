@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserRepoServiceClass {
 
@@ -22,7 +24,12 @@ public class UserRepoServiceClass {
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW,readOnly = true)
     public User getSingleUserEmail(String email){
         return userRepository.findByEmail(email);
     }
@@ -40,7 +47,7 @@ public class UserRepoServiceClass {
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW,readOnly = true)
     public User getUserById(long id){
         return userRepository.findById(id);
     }

@@ -6,7 +6,6 @@
 </head>
 <body>
 
-<body>
 <div class="user_data">
 
     <P><strong>User name:</strong></P><p th:text="${user.name}"></p>
@@ -48,6 +47,14 @@
         </tbody>
     </table>
 
+</div>
+
+<div class="log-out">
+    <a href="/logout">Log-out</a>
+    <a href="/admin/edit_user_page">Find or edit user data</a>
+    <a href="/admin/delete_user">Delete user</a>
+    <a href="/admin/add_new_admin_page">Register user</a>
+    <a href="/admin/show_all">Show all</a>
 </div>
 </body>
 </html>

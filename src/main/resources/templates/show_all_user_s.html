@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .table{
+            border:  2px black;
+        }
+    </style>
+</head>
+<body>
+
+<table class="table">
+    <thead >
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                Surname
+            </td>
+            <td>
+                Date of birth
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user :${users}">
+            <td><a th:href="@{/admin/show_single_user/{id}(id=${user.id})}"  th:text="${user.id}"></a></td>
+            <td><a th:href="@{/admin/show_single_user/{id}(id=${user.id})}" th:text="${user.name}"></a></td>
+            <td><a th:href="@{/admin/show_single_user/{id}(id=${user.id})}" th:text="${user.surname}"></a></td>
+            <td><a th:href="@{/admin/show_single_user/{id}(id=${user.id})}" th:text="${user.birthDate}"></a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="log-out">
+    <a href="/logout">Log-out</a>
+    <a href="/admin/edit_user_page">Find or edit user data</a>
+    <a href="/admin/delete_user">Delete user</a>
+    <a href="/admin/add_new_admin_page">Register user</a>
+    <a href="/admin/show_all">Show all</a>
+</div>
+
+</body>
+</html>

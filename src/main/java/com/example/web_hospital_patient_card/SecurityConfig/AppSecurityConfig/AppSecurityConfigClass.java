@@ -30,7 +30,6 @@ public class AppSecurityConfigClass extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/admin/add_new_admin_page","/admin_service/addNewAdmin").permitAll()
                 .antMatchers("/admin/**","/admin_service/**").hasAuthority(Role.ADMIN.name())
                 .anyRequest()
                 .authenticated()
@@ -38,7 +37,7 @@ public class AppSecurityConfigClass extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/getLoginPage")
                 .permitAll()
-                .defaultSuccessUrl("/admin/add_new_admin_page")
+                .defaultSuccessUrl("/user/user_data")
                 .failureForwardUrl("/getLoginPage");
     }
 

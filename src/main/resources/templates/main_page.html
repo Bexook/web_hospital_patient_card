@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+        .log-in{
+            float: right;
+        }
+
+        .description{
+            alignment: left;
+            align-content: center;
+        }
+    </style>
+
 </head>
 <body>
-<form action="/getLoginPage" method="post">
-    <label>
-        Email:<br/>
-        <input type="text" name="username">
-    </label><br/>
 
-    <label>
-        Password:<br/>
-        <input type="password" name="password">
-    </label><br/>
-    <label>
-        <input type="submit" name="submit">
-    </label>
-</form>
+<div class="log-in">
+    <a href="/getLoginPage">Log-in</a>
+</div>
+
+
+<div class ="description">
+    <p>This project is created with an aim to simplify some part of your and hospital life</p>
+</div>
 <div class="log-out">
     <a href="/logout">Log-out</a>
     <a href="/admin/edit_user_page">Find or edit user data</a>

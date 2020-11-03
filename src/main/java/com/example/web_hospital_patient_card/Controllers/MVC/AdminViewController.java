@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.awt.print.Pageable;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminViewController {
@@ -43,5 +46,18 @@ public class AdminViewController {
     public String getDeletePage(){
         return "delete_page";
     }
+
+
+    @GetMapping("/show_all")
+    public String getAllUsers(Model model){
+        model.addAttribute("users",userRepoServiceClass.getAllUsers());
+        return "show_all_user_s";
+    }
+
+   @GetMapping("/show_single_user/{id}")
+    public String showSingleUser(Model model,@PathVariable("id") long id){
+        model.addAttribute("user",userRepoServiceClass.getUserById(id));
+        return "user_check_page";
+   }
 
 }
