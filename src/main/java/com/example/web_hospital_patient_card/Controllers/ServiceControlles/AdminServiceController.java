@@ -13,10 +13,13 @@ import com.example.web_hospital_patient_card.Services.RepoService.SicknessRepoSe
 import com.example.web_hospital_patient_card.Services.RepoService.UserRepoServiceClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.annotation.WebInitParam;
 import java.text.ParseException;
@@ -49,8 +52,7 @@ public class AdminServiceController {
 
 
     @PostMapping("/addNewAdmin")
-    @ResponseBody
-    public String insertUser(@RequestParam(value = "name") String name,
+    public ModelAndView insertUser(@RequestParam(value = "name") String name,
                              @RequestParam(value = "surname") String surname,
                              @RequestParam(value = "password") String password,
                              @RequestParam(value = "birth_date") String birthDate,
@@ -65,45 +67,45 @@ public class AdminServiceController {
 
         User user = new User();
         if (name == null) {
-            return "setNamePlease";
+            System.out.println("s");
         }
         user.setName(name);
         if (surname == null) {
-            return "setSurNamePlease";
+            System.out.println("s");
         }
         user.setSurname(surname);
 
         if (email == null) {
-            return "setEmailPlease";
+            System.out.println("s");
         }
 
         user.setEmail(email);
 
         if (role == null) {
-            return "setRolePlease";
+            System.out.println("s");
         }
         user.setRole(userServiceClass.setCastStringToRole(role));
 
         if (password == null) {
-            return "setPasswordPlease";
+            System.out.println("s");
         }
         user.setPassword(passwordEncoder.getBCryptEncoder().encode(password));
 
         if (recovery_period == 0) {
-            return "setRecoveryPeriodPlease";
+            System.out.println("s");
         }
         user.setRecoveryPeriod(recovery_period);
         if (birthDate == null) {
-            return "setDateOfBirthPlease";
+            System.out.println("s");
         }
         user.setBirthDate(userServiceClass.getDateFromString(birthDate));
         if (lastAttendanceDate == null) {
-            return "setLastAttendanceDate";
+            System.out.println("s");
         }
         user.setLastAttendanceDate(userServiceClass.getDateFromString(lastAttendanceDate));
 
         if (pill_name == null) {
-            return "setPillIdPlease";
+            System.out.println("s");
         }
 
         if(pillRepoServiceClass.getPillByName(pill_name)==null){
@@ -116,7 +118,7 @@ public class AdminServiceController {
 
 
         if (sicknessName == null) {
-            return "setSicknessIdPlease";
+            System.out.println("s");
         }
 
         if(sicknessRepoServiceClass.getSicknessByName(sicknessName)==null){
@@ -129,7 +131,7 @@ public class AdminServiceController {
 
 
         if (doctor_id == 0) {
-            return "setDoctorIDPlease";
+            System.out.println("s");
         }
 
         user.setDoctor(doctorRepoServiceClass.getDoctorById(doctor_id));
@@ -137,22 +139,21 @@ public class AdminServiceController {
 
 
         userRepoServiceClass.addNewUser(user);
-        return user.toString();
+        return new ModelAndView("redirect:/admin/show_all","users",userRepoServiceClass.getAllUsers());
     }
 
 
     @PostMapping("/edit_user_data_submit")
-    @ResponseBody
-    public String editUser(@RequestParam(value = "user_id",defaultValue = "0") long id,
-                            @RequestParam(value = "name",defaultValue = "null") String name,
-                             @RequestParam(value = "surname",defaultValue = "null") String surname,
-                             @RequestParam(value = "birth_date",defaultValue = "null") String birthDate,
-                             @RequestParam(value = "email",defaultValue = "null") String email,
-                             @RequestParam(value = "sickness_name",defaultValue = "null") String sicknessName,
-                             @RequestParam(value = "pill_name",defaultValue = "null") String pill_name,
-                             @RequestParam(value = "doctor_id",defaultValue = "0") long doctor_id,
-                             @RequestParam(value = "recovery_period",defaultValue = "0") int recovery_period,
-                             @RequestParam(value = "last_attendance_date",defaultValue = "null") String lastAttendanceDate) throws ParseException {
+    public ModelAndView editUser(Model model,@RequestParam(value = "user_id",defaultValue = "0") long id,
+                         @RequestParam(value = "name",defaultValue = "null") String name,
+                         @RequestParam(value = "surname",defaultValue = "null") String surname,
+                         @RequestParam(value = "birth_date",defaultValue = "null") String birthDate,
+                         @RequestParam(value = "email",defaultValue = "null") String email,
+                         @RequestParam(value = "sickness_name",defaultValue = "null") String sicknessName,
+                         @RequestParam(value = "pill_name",defaultValue = "null") String pill_name,
+                         @RequestParam(value = "doctor_id",defaultValue = "0") long doctor_id,
+                         @RequestParam(value = "recovery_period",defaultValue = "0") int recovery_period,
+                         @RequestParam(value = "last_attendance_date",defaultValue = "null") String lastAttendanceDate) throws ParseException {
 
         User user = userRepoServiceClass.getUserById(id);
         System.out.println(user.toString());
@@ -205,7 +206,7 @@ public class AdminServiceController {
 
 
         userRepoServiceClass.updateUser(user);
-        return user.toString();
+        return new ModelAndView("redirect:/admin/show_all","users",userRepoServiceClass.getAllUsers());
     }
 
 

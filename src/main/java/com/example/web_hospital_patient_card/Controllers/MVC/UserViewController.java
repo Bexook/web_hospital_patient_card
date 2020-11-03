@@ -24,7 +24,10 @@ public class UserViewController {
         return "user_check_page";
     }
 
-
+    @GetMapping("/")
+    public String getMainPage(){
+        return "main_page";
+    }
 
 
 }
