@@ -46,12 +46,11 @@ public class UserEntity {
     @ManyToMany(targetEntity = SicknessEntity.class,fetch = FetchType.LAZY)
     private List<SicknessEntity> sicknessList;
 
-    @JoinTable(name = "doctor_user",joinColumns = {
-            @JoinColumn(),
-            @JoinColumn(),
-    })
-    @ManyToOne(targetEntity = DoctorEntity.class,fetch = FetchType.LAZY)
-    private DoctorEntity doctorId;
 
+    private long doctorId;
+
+    private boolean isDoctor;
+
+    private boolean isAdmin;
 
 }
