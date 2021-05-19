@@ -1,14 +1,10 @@
 package com.example.web_hospital_patient_card.Controllers.MVC;
 
-import com.example.web_hospital_patient_card.Models.User;
-import com.example.web_hospital_patient_card.Services.RepoService.UserRepoServiceClass;
+import com.example.web_hospital_patient_card.Models.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
-import java.awt.print.Pageable;
 
 @Controller
 @RequestMapping("/admin")

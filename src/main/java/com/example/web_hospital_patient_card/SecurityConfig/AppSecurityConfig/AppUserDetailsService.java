@@ -1,7 +1,6 @@
 package com.example.web_hospital_patient_card.SecurityConfig.AppSecurityConfig;
 
-import com.example.web_hospital_patient_card.Models.User;
-import com.example.web_hospital_patient_card.Services.RepoService.UserRepoServiceClass;
+import com.example.web_hospital_patient_card.Models.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

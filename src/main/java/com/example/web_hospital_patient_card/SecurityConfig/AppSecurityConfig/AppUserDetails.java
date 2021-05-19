@@ -1,14 +1,12 @@
 package com.example.web_hospital_patient_card.SecurityConfig.AppSecurityConfig;
 
-import com.example.web_hospital_patient_card.Models.RoleManagement;
-import com.example.web_hospital_patient_card.Models.User;
+import com.example.web_hospital_patient_card.Models.roles.RoleManagement;
+import com.example.web_hospital_patient_card.Models.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 

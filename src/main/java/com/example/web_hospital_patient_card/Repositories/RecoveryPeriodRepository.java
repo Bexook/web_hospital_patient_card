@@ -1,4 +1,4 @@
 package com.example.web_hospital_patient_card.Repositories;
 
-public interface UserRepository {
+public interface RecoveryPeriodRepository {
 }

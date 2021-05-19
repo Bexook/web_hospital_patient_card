@@ -1,29 +1,17 @@
 package com.example.web_hospital_patient_card.Controllers.ServiceControlles;
 
-import com.example.web_hospital_patient_card.Models.Doctor;
-import com.example.web_hospital_patient_card.Models.Pill;
-import com.example.web_hospital_patient_card.Models.Sickness;
-import com.example.web_hospital_patient_card.Models.User;
+import com.example.web_hospital_patient_card.Models.entities.MedicineEntity;
+import com.example.web_hospital_patient_card.Models.entities.Sickness;
+import com.example.web_hospital_patient_card.Models.entities.User;
 import com.example.web_hospital_patient_card.SecurityConfig.Encoder.PasswordEncoder;
-import com.example.web_hospital_patient_card.Services.ModelService.SicknessServiceClass;
-import com.example.web_hospital_patient_card.Services.ModelService.UserServiceClass;
-import com.example.web_hospital_patient_card.Services.RepoService.DoctorRepoServiceClass;
-import com.example.web_hospital_patient_card.Services.RepoService.PillRepoServiceClass;
-import com.example.web_hospital_patient_card.Services.RepoService.SicknessRepoServiceClass;
-import com.example.web_hospital_patient_card.Services.RepoService.UserRepoServiceClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.annotation.WebInitParam;
 import java.text.ParseException;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -109,7 +97,7 @@ public class AdminServiceController {
         }
 
         if(pillRepoServiceClass.getPillByName(pill_name)==null){
-            Pill s =new Pill();
+            MedicineEntity s =new MedicineEntity();
             s.setName(pill_name);
             user.setPillList(List.of(s));
         }else {
@@ -183,7 +171,7 @@ public class AdminServiceController {
 
 
         if (!pill_name.equals("null")) {
-            Pill s = new Pill();
+            MedicineEntity s = new MedicineEntity();
             s.setName(pill_name);
             user.getPillList().add(s);
         }
