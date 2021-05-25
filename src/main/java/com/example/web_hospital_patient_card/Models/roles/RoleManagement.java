@@ -1,13 +1,13 @@
 package com.example.web_hospital_patient_card.Models.roles;
 
-import com.example.web_hospital_patient_card.Models.entities.User;
+import com.example.web_hospital_patient_card.Models.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
 
 public class RoleManagement implements GrantedAuthority {
 
-    private User user;
+    private UserDTO user;
 
-    public RoleManagement(User user) {
+    public RoleManagement(UserDTO user) {
         this.user = user;
     }
 

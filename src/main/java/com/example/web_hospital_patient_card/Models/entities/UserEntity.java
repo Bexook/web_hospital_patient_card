@@ -1,6 +1,7 @@
 package com.example.web_hospital_patient_card.Models.entities;
 
 import com.example.web_hospital_patient_card.Models.dto.RecoveryPeriodSicknessDTO;
+import com.example.web_hospital_patient_card.Models.roles.Role;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ import java.util.List;
 //})
 @Data
 @Entity
-@Table(name = "user_data_table")
+@Table(name = "user_data")
 public class UserEntity {
 
     @Id
@@ -34,23 +35,30 @@ public class UserEntity {
     @Column(name = "father_name")
     private String fatherName;
 
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
 
     @OneToMany(targetEntity = RecoveryPeriod.class,fetch = FetchType.LAZY)
     private List<RecoveryPeriod> recoveryPeriods;
 
     @JoinTable(name = "sickness_user",joinColumns = {
-            @JoinColumn(),
-            @JoinColumn()
+            @JoinColumn(name = "sickness_id", foreignKey = @ForeignKey(name = "id"), table = "sickness"),
+            @JoinColumn(name = "user_id",referencedColumnName = "id")
     })
     @ManyToMany(targetEntity = SicknessEntity.class,fetch = FetchType.LAZY)
     private List<SicknessEntity> sicknessList;
 
-
-    private long doctorId;
-
-    private boolean isDoctor;
-
-    private boolean isAdmin;
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
 }

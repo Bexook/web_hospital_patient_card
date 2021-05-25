@@ -7,10 +7,18 @@ import java.util.List;
 @Table(name = "pills_data_table")
 public class MedicineEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "name")
     private String name;
 
+    @ManyToMany
+    @JoinTable(joinColumns = {
+            @JoinColumn(),
+            @JoinColumn()
+    })
     private List<SicknessEntity> suitableFor;
 
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "sickness_data_table")
+@Table(name = "sickness")
 public class SicknessEntity {
 
     private long id;
