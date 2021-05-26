@@ -9,10 +9,16 @@ import java.util.List;
 @Table(name = "sickness")
 public class SicknessEntity {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "sickness_name")
     private String name;
 
+    @ManyToMany(targetEntity = MedicineEntity.class,mappedBy = "suitableFor")
     private List<MedicineEntity> suitableMedicine;
+
 
 }

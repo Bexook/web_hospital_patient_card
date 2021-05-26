@@ -47,18 +47,24 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(targetEntity = RecoveryPeriod.class,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = RecoveryPeriod.class, fetch = FetchType.LAZY)
     private List<RecoveryPeriod> recoveryPeriods;
 
-    @JoinTable(name = "sickness_user",joinColumns = {
-            @JoinColumn(name = "sickness_id", foreignKey = @ForeignKey(name = "id"), table = "sickness"),
-            @JoinColumn(name = "user_id",referencedColumnName = "id")
-    })
-    @ManyToMany(targetEntity = SicknessEntity.class,fetch = FetchType.LAZY)
+    @JoinTable(name = "sickness_user",
+            inverseJoinColumns = @JoinColumn(name = "sickness_id", table = "sickness"),
+            inverseForeignKey = @ForeignKey(name = "sk_user_foreign_key"),
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", table = "user"),
+            foreignKey = @ForeignKey(name = "user_sk_foreign_key"))
+    @ManyToMany(targetEntity = SicknessEntity.class, fetch = FetchType.LAZY)
     private List<SicknessEntity> sicknessList;
 
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @MapsId
+    @OneToOne(targetEntity = AccountDataEntity.class)
+    @JoinColumn(name ="account_id")
+    private AccountDataEntity accountData;
 
 }

@@ -1,6 +1,8 @@
 package com.example.web_hospital_patient_card.SecurityConfig.AppSecurityConfig;
 
+import com.example.web_hospital_patient_card.Models.dto.UserAccountDataDTO;
 import com.example.web_hospital_patient_card.Models.dto.UserDTO;
+import com.example.web_hospital_patient_card.Models.entities.UserEntity;
 import com.example.web_hospital_patient_card.Models.roles.RoleManagement;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,9 +15,9 @@ import java.util.List;
 public class AppUserDetails implements UserDetails {
 
 
-    private UserDTO user;
+    private UserAccountDataDTO user;
 
-    public AppUserDetails(UserDTO user) {
+    public AppUserDetails(UserAccountDataDTO user) {
         this.user = user;
     }
 
@@ -47,11 +49,11 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return !user.isPasswordExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.isActive();
     }
 }

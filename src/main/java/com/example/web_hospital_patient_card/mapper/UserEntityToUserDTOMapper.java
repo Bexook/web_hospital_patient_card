@@ -1,6 +1,8 @@
 package com.example.web_hospital_patient_card.mapper;
 
+import com.example.web_hospital_patient_card.Models.dto.UserAccountDataDTO;
 import com.example.web_hospital_patient_card.Models.dto.UserDTO;
+import com.example.web_hospital_patient_card.Models.entities.AccountDataEntity;
 import com.example.web_hospital_patient_card.Models.entities.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,4 +18,12 @@ public interface UserEntityToUserDTOMapper {
             @Mapping(target = "role",source = "entity.role"),
     })
     UserDTO userEntityToUserDTO(UserEntity userEntity);
+
+
+    //TODO create mapping for this classes
+//
+//    @Mapping(defaultValue = {
+//            @Mapping()
+//    })
+    UserAccountDataDTO userEntityToUserAccountEntityDTO(UserEntity userEntity, AccountDataEntity account);
 }
